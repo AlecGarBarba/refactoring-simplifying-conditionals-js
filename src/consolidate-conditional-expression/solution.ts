@@ -22,7 +22,6 @@ export class Payment {
     return charge;
   }
 
-
   private isNotSummer(): boolean {
     return this.date < SUMMER_START || this.date > SUMMER_END;
   }

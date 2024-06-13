@@ -25,7 +25,7 @@ describe("Payment", () => {
 
       // at a 1 summer rate, result should be 1;
 
-      expect(cost).toBe(1)
+      expect(cost).toBe(1);
     });
 
     it("Should provide a winter rate in non summer time", () => {
@@ -47,9 +47,9 @@ describe("Payment", () => {
 
       const cost = payment.calculatePaymentCost(1);
 
-      // at a 2 * 1.5 
+      // at a 2 * 1.5
 
-      expect(cost).toBe(3)
+      expect(cost).toBe(3);
     });
   });
 });
