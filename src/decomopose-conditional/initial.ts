@@ -10,24 +10,21 @@ export class Discount {
     private readonly isPartTime: boolean,
   ) {}
 
-  
   /**
    * Returns the amount of discount to our senior fellas
-   * 
+   *
    */
   disabilityAmount(): number {
-    if(this.seniority < 2) {
+    if (this.seniority < 2) {
       return 0;
     }
-    if(this.monthsDisabled > 12) {
+    if (this.monthsDisabled > 12) {
       return 0;
     }
-    if(this.isPartTime) {
+    if (this.isPartTime) {
       return 0;
     }
-
 
     return this.seniority * 0.12;
   }
-
 }

@@ -12,16 +12,11 @@ describe("Payment", () => {
       monthsDisabled = 0;
       isPartTime = false;
 
-
-      discount = new Discount(
-        seniority, monthsDisabled, isPartTime
-      
-      );
+      discount = new Discount(seniority, monthsDisabled, isPartTime);
 
       const seniorDiscount = discount.disabilityAmount();
 
-
-      expect(seniorDiscount).toBe(0)
+      expect(seniorDiscount).toBe(0);
     });
 
     it("Should not give discount if citizen has been disabled for over a year", () => {
@@ -29,54 +24,35 @@ describe("Payment", () => {
       monthsDisabled = 20;
       isPartTime = false;
 
-
-      discount = new Discount(
-        seniority, monthsDisabled, isPartTime
-      
-      );
+      discount = new Discount(seniority, monthsDisabled, isPartTime);
 
       const seniorDiscount = discount.disabilityAmount();
 
-
-      expect(seniorDiscount).toBe(0)
+      expect(seniorDiscount).toBe(0);
     });
-
 
     it("Should not give discount if citizen only works part time", () => {
       seniority = 10;
       monthsDisabled = 0;
       isPartTime = true;
 
-
-      discount = new Discount(
-        seniority, monthsDisabled, isPartTime
-      
-      );
+      discount = new Discount(seniority, monthsDisabled, isPartTime);
 
       const seniorDiscount = discount.disabilityAmount();
 
-
-      expect(seniorDiscount).toBe(0)
+      expect(seniorDiscount).toBe(0);
     });
-
 
     it("Should give discount if eligible", () => {
       seniority = 10;
       monthsDisabled = 0;
       isPartTime = false;
 
-
-      discount = new Discount(
-        seniority, monthsDisabled, isPartTime
-      
-      );
+      discount = new Discount(seniority, monthsDisabled, isPartTime);
 
       const seniorDiscount = discount.disabilityAmount();
 
-
-      expect(seniorDiscount).toBe(0.12 * seniority)
+      expect(seniorDiscount).toBe(0.12 * seniority);
     });
-
-   
   });
 });
