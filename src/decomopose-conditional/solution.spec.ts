@@ -1,4 +1,4 @@
-import { Discount } from "./initial";
+import { Discount } from "./solution";
 
 describe("Payment", () => {
   describe("calculatePaymentCost", () => {
