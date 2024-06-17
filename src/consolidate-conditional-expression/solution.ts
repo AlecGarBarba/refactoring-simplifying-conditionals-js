@@ -11,7 +11,7 @@ export class Discount {
   ) {}
 
   /**
-   * Returns the amount of discount to our senior disabled fellas
+   * Returns the amount with discount for our senior fellas
    *
    */
   disabilityAmount(): number {
