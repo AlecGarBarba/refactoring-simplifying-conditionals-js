@@ -1,55 +1,58 @@
-import { Payment } from "./initial";
+import { Discount } from "./initial";
 
 describe("Payment", () => {
   describe("calculatePaymentCost", () => {
-    let payment: Payment;
+    let discount: Discount;
+    let seniority: number;
+    let monthsDisabled: number;
+    let isPartTime: boolean;
 
-    it("Should provide a summer rate", () => {
-      const summerDate = new Date();
+    it("Should not give discount if citizen is not senior", () => {
+      seniority = 1;
+      monthsDisabled = 0;
+      isPartTime = false;
 
-      summerDate.setDate(5);
+      discount = new Discount(seniority, monthsDisabled, isPartTime);
 
-      const summerRate = 1;
-      const winterRate = 2;
+      const seniorDiscount = discount.disabilityAmount();
 
-      const winterServiceCharge = 1.5;
-
-      payment = new Payment(
-        summerDate,
-        summerRate,
-        winterRate,
-        winterServiceCharge,
-      );
-
-      const cost = payment.calculatePaymentCost(1);
-
-      // at a 1 summer rate, result should be 1;
-
-      expect(cost).toBe(1);
+      expect(seniorDiscount).toBe(0);
     });
 
-    it("Should provide a winter rate in non summer time", () => {
-      const summerDate = new Date();
+    it("Should not give discount if citizen has been disabled for over a year", () => {
+      seniority = 10;
+      monthsDisabled = 20;
+      isPartTime = false;
 
-      summerDate.setDate(12); // december
+      discount = new Discount(seniority, monthsDisabled, isPartTime);
 
-      const summerRate = 1;
-      const winterRate = 2;
+      const seniorDiscount = discount.disabilityAmount();
 
-      const winterServiceCharge = 1.5;
+      expect(seniorDiscount).toBe(0);
+    });
 
-      payment = new Payment(
-        summerDate,
-        summerRate,
-        winterRate,
-        winterServiceCharge,
-      );
+    it("Should not give discount if citizen only works part time", () => {
+      seniority = 10;
+      monthsDisabled = 0;
+      isPartTime = true;
 
-      const cost = payment.calculatePaymentCost(1);
+      discount = new Discount(seniority, monthsDisabled, isPartTime);
 
-      // at a 2 * 1.5
+      const seniorDiscount = discount.disabilityAmount();
 
-      expect(cost).toBe(3);
+      expect(seniorDiscount).toBe(0);
+    });
+
+    it("Should give discount if eligible", () => {
+      seniority = 10;
+      monthsDisabled = 0;
+      isPartTime = false;
+
+      discount = new Discount(seniority, monthsDisabled, isPartTime);
+
+      const seniorDiscount = discount.disabilityAmount();
+
+      expect(seniorDiscount).toBe(0.12 * seniority);
     });
   });
 });

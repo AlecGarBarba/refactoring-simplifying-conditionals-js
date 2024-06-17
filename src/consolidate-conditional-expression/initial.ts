@@ -3,22 +3,28 @@ SUMMER_START.setDate(4);
 const SUMMER_END: Date = new Date();
 SUMMER_END.setDate(6);
 
-export class Payment {
+export class Discount {
   constructor(
-    private readonly date: Date,
-    private readonly summerRate: number,
-    private readonly winterRate: number,
-    private readonly winterServiceCharge: number,
+    private readonly seniority: number,
+    private readonly monthsDisabled: number,
+    private readonly isPartTime: boolean,
   ) {}
 
-  calculatePaymentCost(quantity: number): number {
-    let charge: number;
-    if (this.date < SUMMER_START || this.date > SUMMER_END) {
-      charge = quantity * this.winterRate * this.winterServiceCharge;
-    } else {
-      charge = quantity * this.summerRate;
+  /**
+   * Returns the amount of discount to our senior fellas
+   *
+   */
+  disabilityAmount(): number {
+    if (this.seniority < 2) {
+      return 0;
+    }
+    if (this.monthsDisabled > 12) {
+      return 0;
+    }
+    if (this.isPartTime) {
+      return 0;
     }
 
-    return charge;
+    return this.seniority * 0.12;
   }
 }
